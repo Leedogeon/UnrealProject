@@ -78,6 +78,15 @@ APlayerInfo::APlayerInfo()
 	{
 		LookAction = IAL.Object;
 	}
+
+	static ConstructorHelpers::FClassFinder<UAnimInstance> AI(TEXT("/Script/Engine.AnimBlueprint'/Game/Animation/ABP_Player.ABP_Player_C'"));
+	if (AI.Succeeded())
+	{
+		GetMesh()->AnimClass = AI.Class;
+	}
+
+
+
 }
 // Called when the game starts or when spawned
 void APlayerInfo::BeginPlay()
