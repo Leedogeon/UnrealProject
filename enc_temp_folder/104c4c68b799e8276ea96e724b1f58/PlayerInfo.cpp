@@ -180,6 +180,9 @@ void APlayerInfo::Look(const FInputActionValue& Value)
 
 void APlayerInfo::Fire()
 {
+	UE_LOG(LogTemp, Log, TEXT("Fire"));
+
+
 	if (IsValid(AnimInstance))
 	{
 		AnimInstance->PlayerFireMontage();
@@ -188,4 +191,5 @@ void APlayerInfo::Fire()
 
 void APlayerInfo::StopFire()
 {
+	UE_LOG(LogTemp, Log, TEXT("STOP"));
 }

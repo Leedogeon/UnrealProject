@@ -3,13 +3,16 @@
 
 #include "PlayerAnim.h"
 #include "PlayerInfo.h"
-
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Animation/AnimMontage.h"
+#include "Kismet/KismetMathLibrary.h"
+
 
 
 void UPlayerAnim::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
+
 }
 
 void UPlayerAnim::NativeBeginPlay()
@@ -28,7 +31,6 @@ void UPlayerAnim::NativeBeginPlay()
 		}
 
 	}
-
 }
 
 void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)

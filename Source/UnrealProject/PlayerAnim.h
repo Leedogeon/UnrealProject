@@ -28,6 +28,8 @@ private:
 	UPROPERTY(Category = "Animation", EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	FVector Velocity;
 
+
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	class APlayerInfo* Player;
