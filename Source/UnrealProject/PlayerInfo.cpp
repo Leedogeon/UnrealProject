@@ -42,7 +42,7 @@ APlayerInfo::APlayerInfo()
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
 	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
-
+	
 	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
@@ -90,7 +90,7 @@ APlayerInfo::APlayerInfo()
 		GetMesh()->AnimClass = AI.Class;
 	}
 	
-
+	
 
 }
 // Called when the game starts or when spawned
@@ -99,6 +99,16 @@ void APlayerInfo::BeginPlay()
 	Super::BeginPlay();
 	AnimInstance = Cast<UPlayerAction>(GetMesh()->GetAnimInstance());
 	AnimInstance->OnMontageEnded.AddDynamic(this, &APlayerInfo::OnAttackMontageEnded);
+
+	APlayerController* PlayerController = Cast<APlayerController>(Controller);
+	if (PlayerController)
+	{
+		if (PlayerController->PlayerCameraManager)
+		{
+			PlayerController->PlayerCameraManager->ViewPitchMin = -30.0;
+			PlayerController->PlayerCameraManager->ViewPitchMax = 75.0;
+		}
+	}
 
 }
 void APlayerInfo::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)
