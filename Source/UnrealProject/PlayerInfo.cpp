@@ -193,6 +193,7 @@ void APlayerInfo::Fire()
 	if (IsValid(AnimInstance))
 	{
 		AnimInstance->PlayerFireMontage();
+		
 	}
 }
 
