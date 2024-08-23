@@ -82,6 +82,11 @@ APlayerInfo::APlayerInfo()
 	{
 		LookAction = IAL.Object;
 	}
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAI(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Loot.IA_Loot'"));
+	if (IAI.Succeeded())
+	{
+		Interaction = IAI.Object;
+	}
 	
 
 	static ConstructorHelpers::FClassFinder<UAnimInstance> AI(TEXT("/Script/Engine.AnimBlueprint'/Game/Animation/ABP_Player.ABP_Player_C'"));
@@ -144,6 +149,9 @@ void APlayerInfo::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerInfo::Look);
+
+		EnhancedInputComponent->BindAction(Interaction, ETriggerEvent::Triggered, this, &APlayerInfo::Looting);
+
 		
 	}
 	else
@@ -185,6 +193,15 @@ void APlayerInfo::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void APlayerInfo::Looting()
+{
+	if (IsValid(AnimInstance))
+	{
+		AnimInstance->LootingMontage();
+
 	}
 }
 

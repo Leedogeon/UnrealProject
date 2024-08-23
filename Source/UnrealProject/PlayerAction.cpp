@@ -10,6 +10,11 @@ UPlayerAction::UPlayerAction()
 	{
 		FireMontage = AM.Object;
 	}
+	static ConstructorHelpers::FObjectFinder<UAnimMontage> AML(TEXT("/Script/Engine.AnimMontage'/Game/ParagonGideon/Characters/Heroes/Gideon/Animations/Primary_Attack_A_Medium_Montage.Primary_Attack_A_Medium_Montage'"));
+	if (AML.Succeeded())
+	{
+		LootMontage = AML.Object;
+	}
 }
 
 void UPlayerAction::PlayerFireMontage()
@@ -19,6 +24,18 @@ void UPlayerAction::PlayerFireMontage()
 		if (!Montage_IsPlaying(FireMontage))
 		{
 			Montage_Play(FireMontage);
+		}
+	}
+	
+}
+
+void UPlayerAction::LootingMontage()
+{
+	if (IsValid(LootMontage))
+	{
+		if (!Montage_IsPlaying(LootMontage))
+		{
+			Montage_Play(LootMontage);
 		}
 	}
 }

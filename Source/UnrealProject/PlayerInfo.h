@@ -38,6 +38,10 @@ class UNREALPROJECT_API APlayerInfo : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* Interaction;
+
 	
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -55,6 +59,7 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	void Looting();
 	void Fire();
 	void StopFire();
 protected:

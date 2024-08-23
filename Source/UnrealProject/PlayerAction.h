@@ -16,9 +16,12 @@ class UNREALPROJECT_API UPlayerAction : public UPlayerAnim
 
 	UPROPERTY(Category = Animation, EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UAnimMontage* FireMontage;
+	UPROPERTY(Category = Animation, EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UAnimMontage* LootMontage;
 public:
 	UPlayerAction();
 public:
 	void PlayerFireMontage();
+	void LootingMontage();
 	
 };
