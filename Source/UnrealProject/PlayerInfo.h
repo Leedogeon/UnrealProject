@@ -41,7 +41,8 @@ class UNREALPROJECT_API APlayerInfo : public ACharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* Interaction;
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* OpenInventory;
 	
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -60,6 +61,7 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	void Looting();
+	void OpenInven();
 	void Fire();
 	void StopFire();
 protected:

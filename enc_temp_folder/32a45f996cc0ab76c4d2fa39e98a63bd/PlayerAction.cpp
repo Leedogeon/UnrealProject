@@ -36,7 +36,6 @@ void UPlayerAction::LootingMontage()
 		if (!Montage_IsPlaying(LootMontage))
 		{
 			Montage_Play(LootMontage);
-
 		}
 	}
 }

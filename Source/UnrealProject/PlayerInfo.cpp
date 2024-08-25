@@ -82,12 +82,16 @@ APlayerInfo::APlayerInfo()
 	{
 		LookAction = IAL.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IAI(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Loot.IA_Loot'"));
-	if (IAI.Succeeded())
+	static ConstructorHelpers::FObjectFinder<UInputAction> IALoot(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Loot.IA_Loot'"));
+	if (IALoot.Succeeded())
 	{
-		Interaction = IAI.Object;
+		Interaction = IALoot.Object;
 	}
-	
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAInven(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Inven.IA_Inven'"));
+	if (IAInven.Succeeded())
+	{
+		OpenInventory = IAInven.Object;
+	}
 
 	static ConstructorHelpers::FClassFinder<UAnimInstance> AI(TEXT("/Script/Engine.AnimBlueprint'/Game/Animation/ABP_Player.ABP_Player_C'"));
 	if (AI.Succeeded())
@@ -150,8 +154,10 @@ void APlayerInfo::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerInfo::Look);
 
+		//Looting
 		EnhancedInputComponent->BindAction(Interaction, ETriggerEvent::Triggered, this, &APlayerInfo::Looting);
-
+		//Inventory
+		EnhancedInputComponent->BindAction(OpenInventory, ETriggerEvent::Triggered, this, &APlayerInfo::OpenInven);
 		
 	}
 	else
@@ -203,6 +209,11 @@ void APlayerInfo::Looting()
 		AnimInstance->LootingMontage();
 
 	}
+}
+
+void APlayerInfo::OpenInven()
+{
+
 }
 
 void APlayerInfo::Fire()
