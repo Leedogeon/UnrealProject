@@ -26,7 +26,7 @@ void UPlayerAction::PlayerFireMontage()
 			Montage_Play(FireMontage);
 		}
 	}
-	
+
 }
 
 void UPlayerAction::LootingMontage()
@@ -39,5 +39,5 @@ void UPlayerAction::LootingMontage()
 
 		}
 	}
-} 
+}
 
