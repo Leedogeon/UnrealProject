@@ -39,5 +39,5 @@ void UPlayerAction::LootingMontage()
 
 		}
 	}
-}
+} 
 
