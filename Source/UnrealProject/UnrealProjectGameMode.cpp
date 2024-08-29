@@ -12,4 +12,7 @@ AUnrealProjectGameMode::AUnrealProjectGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+
+
+	doessavegamedata
 }
