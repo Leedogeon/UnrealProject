@@ -12,4 +12,5 @@ AUnrealProjectGameMode::AUnrealProjectGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+	
 }
