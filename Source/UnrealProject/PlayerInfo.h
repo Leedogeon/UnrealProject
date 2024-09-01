@@ -43,9 +43,9 @@ class UNREALPROJECT_API APlayerInfo : public ACharacter
 	UInputAction* Interaction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* OpenInventory;
-
 	
 private:
+	
 	UPROPERTY(VisibleAnywhere)
 	class UPlayerAction* AnimInstance;
 

@@ -13,7 +13,7 @@
 #include "InputActionValue.h"
 #include "InputMappingContext.h"
 #include "PlayerAction.h"
-#include "CharacterDataTable.h"
+
 // Sets default values
 APlayerInfo::APlayerInfo()
 {
@@ -98,6 +98,8 @@ APlayerInfo::APlayerInfo()
 	{
 		GetMesh()->AnimClass = AI.Class;
 	}
+	
+	
 
 }
 // Called when the game starts or when spawned
