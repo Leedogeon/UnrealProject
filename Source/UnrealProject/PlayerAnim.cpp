@@ -53,6 +53,7 @@ void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 
 		IsFalling = CharacterMovement->IsFalling();
 
+		AimPoint = Player->GetBaseAimRotation();
 	}
 
 }

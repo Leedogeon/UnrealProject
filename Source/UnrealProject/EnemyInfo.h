@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "EnemyInfo.generated.h"
-
 UCLASS()
 class UNREALPROJECT_API AEnemyInfo : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
+
+
 	// Sets default values for this character's properties
 	AEnemyInfo();
 
