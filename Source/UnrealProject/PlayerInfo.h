@@ -45,9 +45,13 @@ class UNREALPROJECT_API APlayerInfo : public ACharacter
 	UInputAction* Interaction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* OpenInventory;
+	//UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	//UActorComponent* AttackObject;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<UUserWidget> InvenHUD;
+	
 
 private:
 	
@@ -61,6 +65,8 @@ private:
 	FVector FocusStartVec;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	FVector FocusEndVec;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	float FindRange;
 
 public:
 	// Sets default values for this character's properties

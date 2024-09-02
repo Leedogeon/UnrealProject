@@ -4,11 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "StatInfo.generated.h"
-
-
-/**
- * 
- */
 class UNREALPROJECT_API StatInfo
 {
 public:
@@ -16,8 +11,6 @@ public:
 	~StatInfo();
 
 };
-
-
 USTRUCT(BlueprintType)
 struct FStat
 {

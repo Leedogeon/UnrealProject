@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "StatInfo.h"
 #include "EnemyInfo.generated.h"
+
 
 UCLASS()
 class UNREALPROJECT_API AEnemyInfo : public ACharacter
@@ -20,6 +22,10 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	FStat ForStat;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

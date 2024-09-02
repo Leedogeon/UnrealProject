@@ -16,6 +16,11 @@ AEnemyInfo::AEnemyInfo()
 		GetMesh()->SetSkeletalMesh(SM.Object);
 		GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -90.f), FRotator(0.f, 270.f, 0.f));
 	}
+
+
+	ForStat.Lv = 1;
+	ForStat.MaxHP = 100;
+	ForStat.Money = 100;
 }
 
 // Called when the game starts or when spawned

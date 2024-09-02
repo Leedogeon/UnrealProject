@@ -61,7 +61,7 @@ APlayerInfo::APlayerInfo() : Super()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-
+	
 
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SM(TEXT("/Script/Engine.SkeletalMesh'/Game/ParagonGideon/Characters/Heroes/Gideon/Meshes/Gideon.Gideon'"));
 	if (SM.Succeeded())
@@ -111,14 +111,9 @@ APlayerInfo::APlayerInfo() : Super()
 	{
 		GetMesh()->AnimClass = AI.Class;
 	}
-
-
 	ForStat.Lv = 1;
 	ForStat.MaxHP = 100;
 	ForStat.Money = 100;
-
-	
-
 }
 // Called when the game starts or when spawned
 void APlayerInfo::BeginPlay()
@@ -146,10 +141,9 @@ void APlayerInfo::Tick(float DeltaTime)
 	FVector AimFVector = GetBaseAimRotation().Vector();
 	FVector PlayerVector = GetActorForwardVector();
 	FocusStartVec = GetActorLocation();
-	//200.f -> 추가 Range
-	FocusSumVec.X = PlayerVector.X * 200.f;
-	FocusSumVec.Y = PlayerVector.Y * 200.f;
-	FocusSumVec.Z = AimFVector.Z * 200.f;
+	FocusSumVec.X = PlayerVector.X * FindRange;
+	FocusSumVec.Y = PlayerVector.Y * FindRange;
+	FocusSumVec.Z = AimFVector.Z * FindRange;
 	FocusEndVec = FocusStartVec + FocusSumVec;
 
 
@@ -241,6 +235,10 @@ void APlayerInfo::Looting()
 	if (IsValid(AnimInstance))
 	{
 		AnimInstance->LootingMontage();
+		
+		//Dash 생성 후
+		/*UCharacterMovementComponent* Charactermovement = GetCharacterMovement();
+		Charactermovement->MaxWalkSpeed = 3000.f;*/
 
 	}
 }
