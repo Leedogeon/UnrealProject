@@ -13,10 +13,23 @@
 #include "InputActionValue.h"
 #include "InputMappingContext.h"
 #include "PlayerAction.h"
+//Widget
+#include "Blueprint/UserWidget.h"
+#include "Runtime/UMG/Public/UMG.h"
+#include "Runtime/UMG/Public/UMGStyle.h"
+#include "Runtime/UMG/Public/Slate/SObjectWidget.h"
+#include "Runtime/UMG/Public/IUMGModule.h"
+#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 
 // Sets default values
-APlayerInfo::APlayerInfo()
+APlayerInfo::APlayerInfo() : Super()
 {
+	static ConstructorHelpers::FClassFinder<UUserWidget> PlayerHUD(TEXT(""));
+	if (PlayerHUD.Succeeded())
+	{
+		InvenHUD = PlayerHUD.Class;
+	}
+
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
@@ -98,7 +111,12 @@ APlayerInfo::APlayerInfo()
 	{
 		GetMesh()->AnimClass = AI.Class;
 	}
-	
+
+
+	ForStat.Lv = 1;
+	ForStat.MaxHP = 100;
+	ForStat.Money = 100;
+
 	
 
 }
@@ -118,6 +136,22 @@ void APlayerInfo::BeginPlay()
 			PlayerController->PlayerCameraManager->ViewPitchMax = 75.0;
 		}
 	}
+	
+}
+void APlayerInfo::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	FVector FocusSumVec;
+	FVector AimFVector = GetBaseAimRotation().Vector();
+	FVector PlayerVector = GetActorForwardVector();
+	FocusStartVec = GetActorLocation();
+	//200.f -> Ãß°¡ Range
+	FocusSumVec.X = PlayerVector.X * 200.f;
+	FocusSumVec.Y = PlayerVector.Y * 200.f;
+	FocusSumVec.Z = AimFVector.Z * 200.f;
+	FocusEndVec = FocusStartVec + FocusSumVec;
+
 
 }
 void APlayerInfo::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)

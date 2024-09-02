@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "StatInfo.h"
 #include "PlayerInfo.generated.h"
+
 
 class USpringArmComponent;
 class UCameraComponent;
@@ -43,11 +45,22 @@ class UNREALPROJECT_API APlayerInfo : public ACharacter
 	UInputAction* Interaction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* OpenInventory;
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UUserWidget> InvenHUD;
+
 private:
 	
 	UPROPERTY(VisibleAnywhere)
 	class UPlayerAction* AnimInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	FStat ForStat;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	bool PShouldAttack;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	FVector FocusStartVec;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	FVector FocusEndVec;
 
 public:
 	// Sets default values for this character's properties
@@ -71,7 +84,7 @@ protected:
 
 	// To add mapping context
 	virtual void BeginPlay();
-
+	virtual void Tick(float DeltaTime) override;
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
