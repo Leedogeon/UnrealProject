@@ -85,6 +85,11 @@ APlayerInfo::APlayerInfo() : Super()
 	{
 		FireAction = IAF.Object;
 	}
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAD(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Dash.IA_Dash'"));
+	if (IAD.Succeeded())
+	{
+		DashAction = IAD.Object;
+	}
 	static ConstructorHelpers::FObjectFinder<UInputAction> IAM(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Move.IA_Move'"));
 	if (IAM.Succeeded())
 	{
@@ -147,9 +152,31 @@ void APlayerInfo::Tick(float DeltaTime)
 	FocusEndVec = FocusStartVec + FocusSumVec;
 
 
+	//밸런스 조절
+	if (DoDash)
+	{
+		DashGage -= DeltaTime * 100.f;
+	}
+	if (DashGage < 10.f)
+	{
+		ShouldDash = false;
+	}
+	if (!DoDash && DashGage < 100.f)
+	{
+		DashGage += DeltaTime * 70.f;
+	}
+	if (!ShouldDash && DashGage > 70.f)
+	{
+		ShouldDash = true;
+	}
 }
 void APlayerInfo::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
+
+	//if (IsValid(AnimInstance))
+	//{
+	//	PShouldAttack = true;
+	//}
 
 }
 // Called to bind functionality to input
@@ -174,7 +201,10 @@ void APlayerInfo::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &APlayerInfo::Fire);
-		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &APlayerInfo::StopFire);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &APlayerInfo::StopFire);
+
+		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Triggered, this, &APlayerInfo::DashStart);
+		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Completed, this, &APlayerInfo::DashEnd);
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerInfo::Move);
@@ -198,9 +228,10 @@ void APlayerInfo::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 void APlayerInfo::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
-
+	
 	if (Controller != nullptr)
 	{
+		
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
@@ -236,9 +267,7 @@ void APlayerInfo::Looting()
 	{
 		AnimInstance->LootingMontage();
 		
-		//Dash 생성 후
-		/*UCharacterMovementComponent* Charactermovement = GetCharacterMovement();
-		Charactermovement->MaxWalkSpeed = 3000.f;*/
+		
 
 	}
 }
@@ -252,6 +281,7 @@ void APlayerInfo::Fire()
 {
 	if (IsValid(AnimInstance))
 	{
+		//PShouldAttack = false;
 		AnimInstance->PlayerFireMontage();
 		
 	}
@@ -260,3 +290,28 @@ void APlayerInfo::Fire()
 void APlayerInfo::StopFire()
 {
 }
+
+void APlayerInfo::DashStart()
+{
+	if (ShouldDash)
+	{
+		DoDash = true;
+		UCharacterMovementComponent* Charactermovement = GetCharacterMovement();
+		Charactermovement->MaxWalkSpeed = 1000.f;
+	}
+
+	if (!ShouldDash)
+	{
+		DashEnd();
+	}
+	
+	
+}
+void APlayerInfo::DashEnd()
+{
+	DoDash = false;
+	UCharacterMovementComponent* Charactermovement = GetCharacterMovement();
+	Charactermovement->MaxWalkSpeed = 500.f;
+}
+
+
