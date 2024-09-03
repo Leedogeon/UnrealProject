@@ -24,11 +24,11 @@
 // Sets default values
 APlayerInfo::APlayerInfo() : Super()
 {
-	static ConstructorHelpers::FClassFinder<UUserWidget> PlayerHUD(TEXT(""));
-	if (PlayerHUD.Succeeded())
-	{
-		InvenHUD = PlayerHUD.Class;
-	}
+	//static ConstructorHelpers::FClassFinder<UUserWidget> PlayerHUD(TEXT(""));
+	//if (PlayerHUD.Succeeded())
+	//{
+	//	InvenHUD = PlayerHUD.Class;
+	//}
 
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 

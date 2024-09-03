@@ -49,8 +49,8 @@ class UNREALPROJECT_API APlayerInfo : public ACharacter
 	//UActorComponent* AttackObject;
 
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<UUserWidget> InvenHUD;
+	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	//TSubclassOf<UUserWidget> InvenHUD;
 	
 
 private:
@@ -66,7 +66,7 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	FVector FocusEndVec;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	float FindRange;
+	float FindRange = 200.f;
 
 public:
 	// Sets default values for this character's properties
