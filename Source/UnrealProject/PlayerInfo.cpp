@@ -70,42 +70,42 @@ APlayerInfo::APlayerInfo() : Super()
 		GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -90.f), FRotator(0.f, 270.f, 0.f));
 	}
 
-	static ConstructorHelpers::FObjectFinder<UInputMappingContext> DM(TEXT("/Script/EnhancedInput.InputMappingContext'/Game/Input/IMC_Default.IMC_Default'"));
+	static ConstructorHelpers::FObjectFinder<UInputMappingContext> DM(TEXT("/Script/EnhancedInput.InputMappingContext'/Game/BluePrint/Input/IMC_Default.IMC_Default'"));
 	if (DM.Succeeded())
 	{
 		DefaultMappingContext = DM.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IAJ(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Jump.IA_Jump'"));
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAJ(TEXT("/Script/EnhancedInput.InputAction'/Game/BluePrint/Input/Action/IA_Jump.IA_Jump'"));
 	if (IAJ.Succeeded())
 	{
 		JumpAction = IAJ.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IAF(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Fire.IA_Fire'"));
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAF(TEXT("/Script/EnhancedInput.InputAction'/Game/BluePrint/Input/Action/IA_Fire.IA_Fire'"));
 	if (IAF.Succeeded())
 	{
 		FireAction = IAF.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IAD(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Dash.IA_Dash'"));
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAD(TEXT("/Script/EnhancedInput.InputAction'/Game/BluePrint/Input/Action/IA_Dash.IA_Dash'"));
 	if (IAD.Succeeded())
 	{
 		DashAction = IAD.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IAM(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Move.IA_Move'"));
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAM(TEXT("/Script/EnhancedInput.InputAction'/Game/BluePrint/Input/Action/IA_Move.IA_Move'"));
 	if (IAM.Succeeded())
 	{
 		MoveAction = IAM.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IAL(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Look.IA_Look'"));
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAL(TEXT("/Script/EnhancedInput.InputAction'/Game/BluePrint/Input/Action/IA_Look.IA_Look'"));
 	if (IAL.Succeeded())
 	{
 		LookAction = IAL.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IALoot(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Loot.IA_Loot'"));
+	static ConstructorHelpers::FObjectFinder<UInputAction> IALoot(TEXT("/Script/EnhancedInput.InputAction'/Game/BluePrint/Input/Action/IA_Loot.IA_Loot'"));
 	if (IALoot.Succeeded())
 	{
 		Interaction = IALoot.Object;
 	}
-	static ConstructorHelpers::FObjectFinder<UInputAction> IAInven(TEXT("/Script/EnhancedInput.InputAction'/Game/Input/Action/IA_Inven.IA_Inven'"));
+	static ConstructorHelpers::FObjectFinder<UInputAction> IAInven(TEXT("/Script/EnhancedInput.InputAction'/Game/BluePrint/Input/Action/IA_Inven.IA_Inven'"));
 	if (IAInven.Succeeded())
 	{
 		OpenInventory = IAInven.Object;
