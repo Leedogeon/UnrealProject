@@ -155,7 +155,7 @@ void APlayerInfo::Tick(float DeltaTime)
 	//¹ë·±½º Á¶Àý
 	if (DoDash)
 	{
-		DashGage -= DeltaTime * 100.f;
+		DashGage -= DeltaTime * 1.f;
 	}
 	if (DashGage < 10.f)
 	{
