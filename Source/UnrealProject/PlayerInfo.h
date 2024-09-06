@@ -61,7 +61,7 @@ private:
 	
 	UPROPERTY(VisibleAnywhere)
 	class UPlayerAction* AnimInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FStat ForStat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	bool PShouldAttack = true;
