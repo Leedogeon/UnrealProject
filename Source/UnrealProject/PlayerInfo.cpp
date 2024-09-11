@@ -297,7 +297,7 @@ void APlayerInfo::DashStart()
 	{
 		DoDash = true;
 		UCharacterMovementComponent* Charactermovement = GetCharacterMovement();
-		Charactermovement->MaxWalkSpeed = 1000.f;
+		Charactermovement->MaxWalkSpeed = 1500.f;
 	}
 
 	if (!ShouldDash)
