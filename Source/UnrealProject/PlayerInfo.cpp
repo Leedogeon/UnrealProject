@@ -119,6 +119,7 @@ APlayerInfo::APlayerInfo() : Super()
 	ForStat.Lv = 1;
 	ForStat.MaxHP = 100;
 	ForStat.Money = 100;
+	ForStat.MaxMP = 100;
 }
 // Called when the game starts or when spawned
 void APlayerInfo::BeginPlay()

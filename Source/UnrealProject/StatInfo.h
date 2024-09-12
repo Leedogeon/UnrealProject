@@ -22,4 +22,6 @@ public:
 	float MaxHP;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Money;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxMP;
 };
