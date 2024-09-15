@@ -120,6 +120,7 @@ APlayerInfo::APlayerInfo() : Super()
 	ForStat.MaxHP = 100;
 	ForStat.Money = 100;
 	ForStat.MaxMP = 100;
+	PShouldAttack = true;
 }
 // Called when the game starts or when spawned
 void APlayerInfo::BeginPlay()
@@ -267,9 +268,6 @@ void APlayerInfo::Looting()
 	if (IsValid(AnimInstance))
 	{
 		AnimInstance->LootingMontage();
-		
-		
-
 	}
 }
 
@@ -280,11 +278,12 @@ void APlayerInfo::OpenInven()
 
 void APlayerInfo::Fire()
 {
-	if (IsValid(AnimInstance))
+	if (PShouldAttack)
 	{
-		//PShouldAttack = false;
-		AnimInstance->PlayerFireMontage();
-		
+		if (IsValid(AnimInstance))
+		{
+			AnimInstance->PlayerFireMontage();
+		}
 	}
 }
 

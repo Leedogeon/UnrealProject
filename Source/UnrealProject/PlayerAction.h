@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "PlayerAnim.h"
+#include "PlayerInfo.h"
 #include "PlayerAction.generated.h"
+
 
 /**
  * 

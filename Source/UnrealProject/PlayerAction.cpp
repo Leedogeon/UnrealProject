@@ -19,6 +19,7 @@ UPlayerAction::UPlayerAction()
 
 void UPlayerAction::PlayerFireMontage()
 {
+	
 	if (IsValid(FireMontage))
 	{
 		if (!Montage_IsPlaying(FireMontage))
