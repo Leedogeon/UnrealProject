@@ -48,19 +48,14 @@ class UNREALPROJECT_API APlayerInfo : public ACharacter
 	UInputAction* Interaction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* OpenInventory;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	//UActorComponent* AttackObject;
-
-
-	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	//TSubclassOf<UUserWidget> InvenHUD;
 	
 
 private:
 	
 	UPROPERTY(VisibleAnywhere)
 	class UPlayerAction* AnimInstance;
+	UPROPERTY(VisibleAnywhere)
+	class UGameInstance* GameInstance;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FStat ForStat;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))

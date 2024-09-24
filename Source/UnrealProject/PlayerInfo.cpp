@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "PlayerInfo.h"
 #include "Engine/LocalPlayer.h"
@@ -21,28 +19,19 @@
 #include "Runtime/UMG/Public/IUMGModule.h"
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 
-// Sets default values
 APlayerInfo::APlayerInfo() : Super()
 {
-	//static ConstructorHelpers::FClassFinder<UUserWidget> PlayerHUD(TEXT(""));
-	//if (PlayerHUD.Succeeded())
-	//{
-	//	InvenHUD = PlayerHUD.Class;
-	//}
+
 
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
-	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
-	// Configure character movement
-	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); // ...at this rotation rate
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); 
 
-	// Note: For faster iteration times these variables, and many more, can be tweaked in the Character Blueprint
-	// instead of recompiling to adjust them
 	GetCharacterMovement()->JumpZVelocity = 700.f;
 	GetCharacterMovement()->AirControl = 0.35f;
 	GetCharacterMovement()->MaxWalkSpeed = 500.f;
@@ -50,26 +39,22 @@ APlayerInfo::APlayerInfo() : Super()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 
-	// Create a camera boom (pulls in towards the player if there is a collision)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
-	CameraBoom->TargetArmLength = 400.0f; // The camera follows at this distance behind the character	
-	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+	CameraBoom->TargetArmLength = 400.0f;
+	CameraBoom->bUsePawnControlRotation = true;
 	
-	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 
 	
-
+#pragma region ConstructorHelpers
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SM(TEXT("/Script/Engine.SkeletalMesh'/Game/ParagonGideon/Characters/Heroes/Gideon/Meshes/Gideon.Gideon'"));
 	if (SM.Succeeded())
 	{
 		GetMesh()->SetSkeletalMesh(SM.Object);
 		GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -90.f), FRotator(0.f, 270.f, 0.f));
 	}
-
 	static ConstructorHelpers::FObjectFinder<UInputMappingContext> DM(TEXT("/Script/EnhancedInput.InputMappingContext'/Game/Input/IMC_Default.IMC_Default'"));
 	if (DM.Succeeded())
 	{
@@ -116,6 +101,11 @@ APlayerInfo::APlayerInfo() : Super()
 	{
 		GetMesh()->AnimClass = AI.Class;
 	}
+
+#pragma endregion
+
+
+	
 	ForStat.Lv = 1;
 	ForStat.MaxHP = 100;
 	ForStat.Money = 100;
@@ -125,6 +115,8 @@ APlayerInfo::APlayerInfo() : Super()
 // Called when the game starts or when spawned
 void APlayerInfo::BeginPlay()
 {
+
+
 	Super::BeginPlay();
 	AnimInstance = Cast<UPlayerAction>(GetMesh()->GetAnimInstance());
 	AnimInstance->OnMontageEnded.AddDynamic(this, &APlayerInfo::OnAttackMontageEnded);
@@ -175,18 +167,12 @@ void APlayerInfo::Tick(float DeltaTime)
 void APlayerInfo::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
 
-	//if (IsValid(AnimInstance))
-	//{
-	//	PShouldAttack = true;
-	//}
 
 }
-// Called to bind functionality to input
 void APlayerInfo::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
@@ -195,16 +181,16 @@ void APlayerInfo::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		}
 	}
 
-	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
 
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
+		//Attack
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &APlayerInfo::Fire);
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &APlayerInfo::StopFire);
-
+		//Dash
 		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Triggered, this, &APlayerInfo::DashStart);
 		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Completed, this, &APlayerInfo::DashEnd);
 
