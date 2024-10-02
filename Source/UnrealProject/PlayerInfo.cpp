@@ -251,10 +251,10 @@ void APlayerInfo::Look(const FInputActionValue& Value)
 
 void APlayerInfo::Looting()
 {
-	if (IsValid(AnimInstance))
+	/*if (IsValid(AnimInstance))
 	{
 		AnimInstance->LootingMontage();
-	}
+	}*/
 }
 
 void APlayerInfo::OpenInven()

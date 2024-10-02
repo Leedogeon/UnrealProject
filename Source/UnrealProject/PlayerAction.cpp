@@ -31,13 +31,13 @@ void UPlayerAction::PlayerFireMontage()
 
 void UPlayerAction::LootingMontage()
 {
-	if (IsValid(LootMontage))
-	{
-		if (!Montage_IsPlaying(LootMontage))
-		{
-			Montage_Play(LootMontage);
+	//if (IsValid(LootMontage))
+	//{
+	//	if (!Montage_IsPlaying(LootMontage))
+	//	{
+	//		Montage_Play(LootMontage);
 
-		}
-	}
+	//	}
+	//}
 }
 
